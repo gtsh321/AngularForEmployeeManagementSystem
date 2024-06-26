@@ -9,7 +9,9 @@ import { Employee } from './employee';
 export class EmployeeService {
   
   private baseURL = "http://localhost:8079/api/v1/employees";
+
   private baseURLForAdd = "http://localhost:8079/api/v1/createemployees";
+  
   constructor(private httpClient : HttpClient) { }
   getEmployeesList(): Observable<Employee[]> {
     return this.httpClient.get<Employee[]>(`${this.baseURL}`);  // Corrected line
@@ -17,5 +19,9 @@ export class EmployeeService {
 
   createEmployee(employee :Employee):Observable<object>{
     return this.httpClient.post(`${this.baseURLForAdd}`, employee);
+  }
+
+  getEmployeeById(id:number):Observable<Employee>{
+    return this.httpClient.get<Employee>(`${this.baseURL}/${id}`); 
   }
 }
