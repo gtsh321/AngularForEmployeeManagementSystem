@@ -11,7 +11,7 @@ export class EmployeeService {
   private baseURL = "http://localhost:8079/api/v1/employees";
 
   private baseURLForAdd = "http://localhost:8079/api/v1/createemployees";
-  
+
   constructor(private httpClient : HttpClient) { }
   getEmployeesList(): Observable<Employee[]> {
     return this.httpClient.get<Employee[]>(`${this.baseURL}`);  // Corrected line
@@ -23,5 +23,9 @@ export class EmployeeService {
 
   getEmployeeById(id:number):Observable<Employee>{
     return this.httpClient.get<Employee>(`${this.baseURL}/${id}`); 
+  }
+
+  updateEmployee(id: number, employee: Employee): Observable<object>{
+    return this.httpClient.put(`${this.baseURL}/${id}`, employee);
   }
 }
